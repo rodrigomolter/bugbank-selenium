@@ -22,8 +22,10 @@ To run this project you will need
 ## Installation 🏗️
 
 ### WebDrivers
-For Web UI testing, you will need to install the latest versions of the WebDriver executables for your browser: [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/) for Google Chrome
-or [geckodriver](https://github.com/mozilla/geckodriver/releases) for Firefox.
+For Web UI testing, you will need to install the latest versions of the WebDriver executables for your browser:
+- [ChromeDriver](https://chromedriver.chromium.org/downloads) for Google Chrome
+- [Geckodriver](https://github.com/mozilla/geckodriver/releases/latest) for Firefox.
+  
 Each test case will launch the WebDriver executable for its target browser.
 The WebDriver executable will act as a proxy between the test automation and the browser instance.
 Please use the latest versions of both the browsers and the WebDriver executables.
