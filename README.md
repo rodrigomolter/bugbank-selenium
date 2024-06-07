@@ -9,7 +9,7 @@ BugBank application was developed by [Jhonatas Matos](https://www.linkedin.com/i
 
 ## Test Plan 👨‍🔬
 The avaiable **Test Plans** for the application are located here: <br>
-- **[🐞 BugBank Testing Plans](https://dynamic-keeper-66c.notion.site/BugBank-aa400d5fd6b44bc38d8112df2278191b)**
+- **[🐞 BugBank Features](./features)**
 
 ## Pre-requirements 📋
 
