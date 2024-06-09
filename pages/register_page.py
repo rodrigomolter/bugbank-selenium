@@ -32,6 +32,7 @@ class RegisterPage(Page):
     email = email or self.fake.email()
     password = password or self.fake.password()
     account_number = f"{self.fake.random_number(digits=3)}-{self.fake.random_digit()}"
+    balance = 5000 if withBalance else 0
 
     script = f"""
       localStorage.setItem('{email}', JSON.stringify({{
@@ -39,7 +40,7 @@ class RegisterPage(Page):
         "email": "{email}",
         "password": "{password}",
         "accountNumber": "{account_number}",
-        "balance": {str(withBalance).lower()},
+        "balance": {balance},
         "logged": false
     }}));
     """
