@@ -6,4 +6,4 @@ class HomePage(Page):
 
 
   def is_at_page(self):
-    return self.webdriver.find_element(*self.accountNumber)
+    return self.find_element(self.accountNumber)
