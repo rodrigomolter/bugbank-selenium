@@ -3,15 +3,24 @@ from selenium.webdriver.common.by import By
 from page_objects.page_objects import Page
 
 class RegisterPage(Page):
+
   email = (By.NAME, "email")
   name = (By.NAME, "name")
   password = (By.NAME, "password")
   passwordConfirmation = (By.NAME, "passwordConfirmation")
   addBalance = (By.ID, "toggleAddBalance")
   submit = (By.XPATH, "//button[@type='submit'][contains(.,'Cadastrar')]")
-              
+
+  register = (By.XPATH, "//div[@class='login__buttons']/button[text()='Registrar']")
+  modalSucess = (By.ID, "modalText")
 
   fake = Faker()
+
+  def open(self, url):
+    self.url = url
+    self.webdriver.get(url)
+    self.find_element(self.register).click()
+
 
   def register_by_ui(self, name, email, password, withBalance = False):
     name = name or self.fake.name()
@@ -45,3 +54,6 @@ class RegisterPage(Page):
     }}));
     """
     self.webdriver.execute_script(script)
+
+  def user_created_successfully(self):
+    return self.find_element(self.modalSucess)
