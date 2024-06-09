@@ -1,46 +1,43 @@
 from faker import Faker
-from selenium.webdriver.common.by import By
-from page_objects.page_objects import Page
+from selenium import webdriver
+from selenium.webdriver.remote.webelement import WebElement
+from pages.base_page import BasePage
+from utils.locators import RegisterPageLocators
 
-class RegisterPage(Page):
+class RegisterPage(BasePage):
 
-  email = (By.NAME, "email")
-  name = (By.NAME, "name")
-  password = (By.NAME, "password")
-  passwordConfirmation = (By.NAME, "passwordConfirmation")
-  addBalance = (By.ID, "toggleAddBalance")
-  submit = (By.XPATH, "//button[@type='submit'][contains(.,'Cadastrar')]")
-
-  register = (By.XPATH, "//div[@class='login__buttons']/button[text()='Registrar']")
-  modalSucess = (By.ID, "modalText")
-
-  fake = Faker()
-
-  def open(self, url):
-    self.url = url
-    self.webdriver.get(url)
-    self.find_element(self.register).click()
+  def __init__(self, webdriver: webdriver) -> None:
+    self.locator = RegisterPageLocators
+    super().__init__(webdriver)
 
 
-  def register_by_ui(self, name, email, password, withBalance = False):
-    name = name or self.fake.name()
-    email = email or self.fake.email()
-    password = password or self.fake.password()
-
-    self.find_element(self.email).send_keys(email)
-    self.find_element(self.name).send_keys(name)
-    self.find_element(self.password).send_keys(password)
-    self.find_element(self.passwordConfirmation).send_keys(password)
-    self.find_element(self.passwordConfirmation).send_keys(password) if withBalance else None
-
-    self.find_element(self.submit).click()
+  def open(self, path: str = '') -> None:
+    self.webdriver.get(str(self.base_url + path))
+    self.find_element(self.locator.BTN_REGISTER).click()
 
 
-  def register_by_api(self, name='', email='', password='', withBalance = False):
-    name = name or self.fake.name()
-    email = email or self.fake.email()
-    password = password or self.fake.password()
-    account_number = f"{self.fake.random_number(digits=3)}-{self.fake.random_digit()}"
+  def register_by_ui(self, email: str = None, password: str = None, name: str = None, withBalance: bool = False) -> None:
+    faker = Faker()
+    name = name or faker.name()
+    email = email or faker.email()
+    password = password or faker.password()
+
+    self.find_element(self.locator.EMAIL).send_keys(email)
+    self.find_element(self.locator.NAME).send_keys(name)
+    self.find_element(self.locator.PASSWORD).send_keys(password)
+    self.find_element(self.locator.PASSWORD_CONFIRMATION).send_keys(password)
+    if withBalance:
+      self.find_element(self.locator.ADD_BALANCE).click()
+
+    self.find_element(self.locator.BTN_SUBMIT).click()
+
+
+  def register_by_api(self, email: str = None, password: str = None,  name: str = None, withBalance: bool = False) -> dict:
+    faker = Faker()
+    name = name or faker.name()
+    email = email or faker.email()
+    password = password or faker.password()
+    account_number = f"{faker.random_number(digits=3)}-{faker.random_digit()}"
     balance = 5000 if withBalance else 0
 
     script = f"""
@@ -54,6 +51,8 @@ class RegisterPage(Page):
     }}));
     """
     self.webdriver.execute_script(script)
+    return {'name': name, 'email': email, 'password': password, 'accountNumber': account_number, 'balance': balance}
 
-  def user_created_successfully(self):
-    return self.find_element(self.modalSucess)
+  def user_created_successfully(self) -> WebElement:
+    self.wait_element(self.locator.MODAL_TEXT)
+    return self.find_element(self.locator.MODAL_TEXT)

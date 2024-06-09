@@ -7,7 +7,7 @@ from json import loads
 @given('que eu esteja na página login')
 def open_login_page(context):
   context.page = LoginPage (context.browser)
-  context.page.open(context.base_url)
+  context.page.open()
 
 
 @when('efetuar login com dados validos')

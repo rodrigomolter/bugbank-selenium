@@ -4,7 +4,7 @@ from pages.register_page import RegisterPage
 @given('que eu estou na página de registro')
 def open_register_page(context):
   context.page = RegisterPage(context.browser)
-  context.page.open(context.base_url)
+  context.page.open()
 
 
 @when('eu preencho o formulário de cadastro')

@@ -1,19 +1,18 @@
-from selenium.webdriver.common.by import By
-from page_objects.page_objects import Page
+from selenium import webdriver
+from selenium.webdriver.remote.webelement import WebElement
+from pages.base_page import BasePage
+from utils.locators import LoginPageLocators
 
-class LoginPage(Page):
-  email = (By.NAME, "email")
-  password = (By.NAME, "password")
-  submit = (By.XPATH, "//button[@type='submit'][contains(.,'Acessar')]")
+class LoginPage(BasePage):
+  def __init__(self, webdriver: webdriver) -> None:
+    self.locator = LoginPageLocators
+    super().__init__(webdriver)
 
-  modal_text = (By.ID, "modalText")
-  close_modal = (By.ID, "btnCloseModal")
+  def login_valid_credentials(self, email: str, password: str) -> None:
+    self.find_element(self.locator.EMAIL).send_keys(email)
+    self.find_element(self.locator.PASSWORD).send_keys(password)
+    self.find_element(self.locator.BTN_SUBMIT).click()
 
-  def login_valid_credentials(self, email=email, password=password):
-    self.find_element(self.email).send_keys(email)
-    self.find_element(self.password).send_keys(password)
-    self.find_element(self.submit).click()
-
-
-  def have_invalid_user_alert(self):
-    return self.find_element(self.modal_text)
+  def have_invalid_user_alert(self) -> WebElement:
+    self.wait_element(self.locator.MODAL_TEXT)
+    return self.find_element(self.locator.MODAL_TEXT)
