@@ -18,7 +18,7 @@ def before_all(context):
         context.browser = Chrome(options=options)
     elif browser == 'headless firefox':
         options = FirefoxOptions()
-        options.headless = True
+        options.add_argument('-headless')
         context.browser = Firefox(options=options)
     else:
         raise ValueError(f"Unsupported browser: {browser}")
