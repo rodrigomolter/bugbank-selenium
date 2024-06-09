@@ -5,9 +5,8 @@ class Account():
   def __init__(self, accountNumber: str = None, withBalance: bool = False) -> None:
     faker = Faker()
     self.accountNumber = accountNumber or f"{faker.random_number(digits=3)}-{faker.random_digit()}"
-    self.transfers = list[Transfer]
-    if withBalance:
-      self.balance = 1000 if withBalance else 0
+    self.transfers: list[Transfer] = []
+    self.balance = 1000 if withBalance else 0
     self.transfers.append(Transfer(type="Abertura de conta", description="Saldo adicionado ao abrir conta", transferValue=self.balance))
 
     @property
