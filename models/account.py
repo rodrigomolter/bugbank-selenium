@@ -10,7 +10,7 @@ class Account():
     self.transfers.append(Transfer(type="Abertura de conta", description="Saldo adicionado ao abrir conta", transferValue=self.balance))
 
     @property
-    def balance(self) -> None:
+    def balance(self) -> float:
       return self.balance
     
     @property
@@ -23,7 +23,7 @@ class Account():
       self.updateBalance(transfer.transferValue)
       return self.transfers
     
-    def updateBalance(self, transferAmount: int) -> int:
+    def updateBalance(self, transferAmount: float) -> float:
       self.balance += transferAmount
       return balance
 
