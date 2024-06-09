@@ -5,7 +5,7 @@ from pages.register_page import RegisterPage
 from json import loads
 
 @given('que eu esteja na página login')
-def go_to_page(context):
+def open_login_page(context):
   context.page = LoginPage (context.browser)
   context.page.open(context.base_url)
 

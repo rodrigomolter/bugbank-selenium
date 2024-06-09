@@ -1,6 +1,6 @@
 # language: pt
 Funcionalidade: Login do usuário
-  Como um usuário
+  Como um usuário da aplicação
   Eu gostaria de poder fazer login no Bug Bank
   Para que eu possa acessar a minha conta
 
