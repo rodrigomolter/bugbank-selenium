@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
 from utils.locators import RegisterPageLocators
+from models.customer import Customer
 
 class RegisterPage(BasePage):
 
@@ -32,26 +33,21 @@ class RegisterPage(BasePage):
     self.find_element(self.locator.BTN_SUBMIT).click()
 
 
-  def register_by_api(self, email: str = None, password: str = None,  name: str = None, withBalance: bool = False) -> dict:
-    faker = Faker()
-    name = name or faker.name()
-    email = email or faker.email()
-    password = password or faker.password()
-    account_number = f"{faker.random_number(digits=3)}-{faker.random_digit()}"
-    balance = 5000 if withBalance else 0
+  def register_by_api(self, email: str = None, password: str = None,  name: str = None, withBalance: bool = False) -> Customer:
+    customer = Customer(email=email, name=name, password=password, withBalance=withBalance)
 
     script = f"""
-      localStorage.setItem('{email}', JSON.stringify({{
-        "name": "{name}",
-        "email": "{email}",
-        "password": "{password}",
-        "accountNumber": "{account_number}",
-        "balance": {balance},
+      localStorage.setItem('{customer.email}', JSON.stringify({{
+        "name": "{customer.name}",
+        "email": "{customer.email}",
+        "password": "{customer.password}",
+        "accountNumber": "{customer.account.accountNumber}",
+        "balance": {customer.account.balance},
         "logged": false
     }}));
     """
     self.webdriver.execute_script(script)
-    return {'name': name, 'email': email, 'password': password, 'accountNumber': account_number, 'balance': balance}
+    return customer
 
   def user_created_successfully(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
