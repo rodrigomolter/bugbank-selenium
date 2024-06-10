@@ -1,3 +1,4 @@
+import json
 from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
@@ -16,3 +17,10 @@ class LoginPage(BasePage):
   def have_invalid_user_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT)
+  
+  def is_auth(self, email: str) -> bool:
+    response = self.webdriver.execute_script(f"return window.localStorage.getItem('{email}');")
+    if response:
+      user = json.loads(response)
+      return bool(user.get('logged', False))
+    return False

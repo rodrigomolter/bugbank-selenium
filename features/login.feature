@@ -1,19 +1,20 @@
 # language: pt
 Funcionalidade: Login do usuário
-  Como um usuário da aplicação
-  Eu gostaria de poder fazer login no Bug Bank
-  Para que eu possa acessar a minha conta
 
-  Cenário: Login com sucesso
-    Dado que eu esteja na página login
-    Quando efetuar login com dados validos
-    | email           | senha |
-    | teste@email.com | s3nh@ |
-    Então sou redirecionado para a Home
+  Como um usuário do BugBank,
+  Eu quero fazer login no sistema,
+  Para que eu possa acessar minha conta e gerenciar minhas finanças online.
+
+
+  Cenário: Login com credenciais válidas
+    Dado que o usuário está na página de login do BugBank
+    Quando o usuário fazer login com o email "usuario@valido.com" e senha "senha_valida"
+    Então o usuário deve ser autenticado com sucesso
+    E o sistema deve redirecionar o usuário para a página inicial
+
 
   Cenário: Login com usuario não cadastrado
-    Dado que eu esteja na página login
-    Quando efetuar login com dados invalidos
-    | email           | senha |
-    | email@email.com | s3nh@ |
-    Então recebo aviso de email ou senha invalido
+    Dado que o usuário está na página de login do BugBank
+    Quando o usuário tentar fazer login com o email "usuario@naocadastrado.com" e senha "senha_qualquer" não cadastrados
+    Então o sistema deve exibir a mensagem "Usuário ou senha inválido."
+    E o usuário não deve ser autenticado
