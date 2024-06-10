@@ -18,9 +18,11 @@ class LoginPage(BasePage):
     self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT)
   
-  def is_auth(self, email: str) -> bool:
+  def get_user_details(self, email: str) -> dict:
     response = self.webdriver.execute_script(f"return window.localStorage.getItem('{email}');")
     if response:
-      user = json.loads(response)
-      return bool(user.get('logged', False))
-    return False
+      return json.loads(response)
+    return {}
+    
+  def is_auth(self, email: str) -> bool:
+    return bool(self.get_user_details(email).get('logged', False))

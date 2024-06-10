@@ -29,4 +29,10 @@ class BasePage(ABC):
         WebDriverWait(self.webdriver, 10).until(EC.presence_of_element_located(locator))
     except TimeoutException:
         print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
-        self.webdriver.quit()
+
+  def is_visible(self, locator: tuple[By, str]) -> bool:
+    try:
+        element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
+        return element.is_displayed()
+    except:
+        return False
