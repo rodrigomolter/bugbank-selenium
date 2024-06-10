@@ -23,8 +23,18 @@ def before_all(context):
     else:
         raise ValueError(f"Unsupported browser: {browser}")
     
-
+    context.browser.implicitly_wait(5)
     # context.base_url = context.config.userdata.get('base_url')
+
+def before_scenario(context, scenario):
+    if "skip" in scenario.effective_tags:
+        scenario.skip("Marked with @skip")
+        return
+    
+def before_feature(context, feature):
+    if "skip" in feature.tags:
+        feature.skip("Marked with @skip")
+        return
 
 
 def after_all(context):
