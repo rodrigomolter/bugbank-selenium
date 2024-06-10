@@ -1,13 +1,14 @@
 # language: pt
-Funcionalidade: Registro de novo usuário
-  Como um novo cliente do BugBank
-  Eu gostaria de poder me registrar
-  Para que eu possa desfrutar das Funcionalidades do banco
+Funcionalidade: Cadastro de Usuário no BugBank
+  Como um novo usuário do BugBank,
+  Eu quero me cadastrar no sistema,
+  Para que eu possa utilizar os serviços oferecidos.
 
+  Contexto: Usuário na tela de cadastro
+    Dado que o usuário está na tela de cadastro do BugBank
 
-  Cenário: Registro de um usuário válido
-    Dado que eu estou na página de registro
-    Quando eu preencho o formulário de cadastro
+  Cenário: Cadastro de um usuário válido
+    Quando o usuário se cadastra preenchendo todos os campos corretamente
     | email             | nome    | senha    | comSaldo |
     | rodrigo@email.com | Rodrigo | p@ssw0rd | sim      |
-    Então devo receber uma confirmação de que minha conta foi criada com sucesso
+    Então devo receber uma mensagem de criação de conta com sucesso com o número da conta criada

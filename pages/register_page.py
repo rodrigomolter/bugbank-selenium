@@ -37,7 +37,7 @@ class RegisterPage(BasePage):
     customer = Customer(email=email, name=name, password=password, withBalance=withBalance)
 
     script = f"""
-      localStorage.setItem('{customer.email}', JSON.stringify({{
+      localStorage.setItem("{customer.email}", JSON.stringify({{
         "name": "{customer.name}",
         "email": "{customer.email}",
         "password": "{customer.password}",
