@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
 from utils.locators import LoginPageLocators
+from models.customer import Customer
 
 class LoginPage(BasePage):
   def __init__(self, webdriver: webdriver) -> None:
@@ -26,3 +27,11 @@ class LoginPage(BasePage):
     
   def is_auth(self, email: str) -> bool:
     return bool(self.get_user_details(email).get('logged', False))
+  
+  def auth_by_api(self) -> None:
+    self.webdriver.add_cookie({
+        'name': 'bugbank-auth',
+        'value': 'true',
+        'path': '/',
+        'expires': 1
+      })
