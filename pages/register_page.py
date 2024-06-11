@@ -1,4 +1,3 @@
-from faker import Faker
 from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
@@ -41,24 +40,24 @@ class RegisterPage(BasePage):
     self.fill_password_confirmation(password)
 
 
-  def register_by_ui(self, email: str = None, password: str = None, name: str = None, withBalance: bool = False) -> None:
-    customer = Customer(email=email, name=name, password=password, withBalance=withBalance)
+  def register_by_ui(self, email: str = None, password: str = None, name: str = None, with_balance: bool = False) -> None:
+    customer = Customer(email=email, name=name, password=password, with_balance=with_balance)
 
     self.fill_form(customer.name, customer.email, customer.password)
-    if withBalance:
+    if with_balance:
       self.toggle_create_with_balance()
     self.click_register_button()
 
 
-  def register_by_api(self, email: str = None, password: str = None,  name: str = None, withBalance: bool = False) -> Customer:
-    customer = Customer(email=email, name=name, password=password, withBalance=withBalance)
+  def register_by_api(self, email: str = None, password: str = None,  name: str = None, with_balance: bool = False, logged: bool = False) -> Customer:
+    customer = Customer(email=email, name=name, password=password, with_balance=with_balance)
 
     script = f"""
       localStorage.setItem("{customer.email}", JSON.stringify({{
         "name": "{customer.name}",
         "email": "{customer.email}",
         "password": "{customer.password}",
-        "accountNumber": "{customer.account.accountNumber}",
+        "accountNumber": "{customer.account.account_number}",
         "balance": {customer.account.balance},
         "logged": false
     }}));
@@ -68,14 +67,13 @@ class RegisterPage(BasePage):
   
   
   def register_without_field(self, field: tuple[str, str]) -> None:
-    faker = Faker()
+    customer = Customer()
 
-    password = faker.password()
     field_values = {
-      "email" : faker.email(),
-      "name" : faker.name(),
-      "password" : password,
-      "password_confirmation" : password
+      "email" : customer.email,
+      "name" : customer.name,
+      "password" : customer.password,
+      "password_confirmation" : customer.password
     }
 
     field_methods = {

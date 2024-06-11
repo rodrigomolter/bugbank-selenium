@@ -2,7 +2,6 @@ from behave import given, when, then
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
 from pages.register_page import RegisterPage
-from json import loads
 
 @given('que o usuário está na página de login do BugBank')
 def open_login_page(context):

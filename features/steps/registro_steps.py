@@ -1,10 +1,10 @@
 import re
-from faker import Faker
 from behave import given, when, then
 
 from pages.register_page import RegisterPage
 from models.customer import Customer
 from pages.login_page import LoginPage
+from utils.utils import Utils
 
 @given('que o usuário está na tela de cadastro do BugBank')
 def step_open_register_page(context):
@@ -16,7 +16,7 @@ def step_register_with_given_data(context):
     for linha in context.table.rows:
       credentials = dict(linha.items())
     credentials["comSaldo"] = True if credentials['comSaldo'] == "sim" else False
-    context.page.register_by_ui(name=credentials["nome"], email=credentials["email"], password=credentials["senha"], withBalance=credentials["comSaldo"])
+    context.page.register_by_ui(name=credentials["nome"], email=credentials["email"], password=credentials["senha"], with_balance=credentials["comSaldo"])
 
 
 @then('o sistema deve exibir receber uma mensagem de criação de conta com sucesso com o número da conta criada')
@@ -69,5 +69,4 @@ def step_not_add_balance(context):
 @then('o sistema deve criar a conta com um saldo de R$ {value}')
 def step_new_account_with_balance(context, value):
   user = LoginPage(context.browser).get_user_details(context.customer.email)
-  expected_balance = float(value.replace(".", "").replace(",", "."))
-  assert user.get("balance", False) == expected_balance
+  assert user.get("balance", False) == Utils().currency_to_float(value)
