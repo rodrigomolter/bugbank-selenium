@@ -20,3 +20,14 @@ class RegisterPageLocators():
   BTN_REGISTER = (By.XPATH, "//div[@class='login__buttons']/button[text()='Registrar']")
   MODAL_TEXT = (By.XPATH, "//p[@id='modalText']")
   INPUT_WARNING = (By.CLASS_NAME, "input__warging")
+
+class TransferPageLocators():
+  ACCOUNT_NUMBER = (By.NAME, "accountNumber")
+  DIGIT = (By.NAME, "digit")
+  TRANSFER_VALUE = (By.NAME, "transferValue")
+  DESCRIPTION = (By.NAME, "description")
+  BTN_SUBMIT = (By.XPATH, "//form/button[@type='submit'][contains(.,'Transferir agora')]")
+  MODAL_TEXT = (By.XPATH, "//p[@id='modalText']")
+
+class BankStatementLocators():
+  BALANCE = (By.ID, "textBalanceAvailable")

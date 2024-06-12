@@ -59,11 +59,25 @@ class RegisterPage(BasePage):
         "password": "{customer.password}",
         "accountNumber": "{customer.account.account_number}",
         "balance": {customer.account.balance},
-        "logged": false
+        "logged": {str(logged).lower()}
     }}));
     """
     self.webdriver.execute_script(script)
     return customer
+  
+  def persist_user_info(self, customer: Customer, logged: bool = False) -> None:
+
+    script = f"""
+      localStorage.setItem("{customer.email}", JSON.stringify({{
+        "name": "{customer.name}",
+        "email": "{customer.email}",
+        "password": "{customer.password}",
+        "accountNumber": "{customer.account.account_number}",
+        "balance": {customer.account.balance},
+        "logged": {str(logged).lower()}
+    }}));
+    """
+    self.webdriver.execute_script(script)
   
   
   def register_without_field(self, field: tuple[str, str]) -> None:
@@ -87,13 +101,10 @@ class RegisterPage(BasePage):
         if field != key:
             method(field_values[key])
 
+  def mandatory_fields_warning(self) -> bool:
+    return any(element.is_displayed() for element in self.find_elements(self.locator.INPUT_WARNING))
 
-
-  def mandatory_fields_warning(self) -> list:
-    if self.is_visible(self.locator.INPUT_WARNING):
-      return self.find_elements(self.locator.INPUT_WARNING)
-    return []
   
-  def user_created_successfully(self) -> WebElement:
+  def get_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT)

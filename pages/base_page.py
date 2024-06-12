@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 class BasePage(ABC):
-  def __init__(self, webdriver: webdriver, base_url: str = 'https://bugbank.netlify.app/') -> None:
+  def __init__(self, webdriver: webdriver, base_url: str = 'https://bugbank.netlify.app') -> None:
     self.webdriver: webdriver = webdriver
     self.base_url = base_url
 
@@ -36,3 +36,8 @@ class BasePage(ABC):
         return element.is_displayed()
     except:
         return False
+    
+  def delete_browser_data(self) -> None:
+    self.webdriver.execute_script("window.localStorage.clear();")
+    self.webdriver.delete_all_cookies()
+    self.webdriver.refresh()
