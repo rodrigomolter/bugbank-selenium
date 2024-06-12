@@ -15,5 +15,5 @@ Funcionalidade: Login do usuário
 
   Cenário: Login com usuario não cadastrado
     Quando o usuário tentar fazer login com o email "usuario@naocadastrado.com" e senha "senha_qualquer" não cadastrados
-    Então o sistema deve exibir a mensagem "Usuário ou senha inválido."
+    Então o sistema deve exibir uma mensagem informando "Usuário ou senha inválido."
     E o usuário não deve ser autenticado

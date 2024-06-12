@@ -15,29 +15,29 @@ Funcionalidade: Cadastro de Usuário no BugBank
 
   Esquema do Cenário: Tentativa de cadastro sem preencher campo
     Quando o usuário tenta se cadastrar sem preencher o campo de <campo>
-    Então o sistema deve exibir a mensagem de <mensagem>
+    Então o sistema deve exibir a mensagem de campo obrigatório
 
     Exemplos:
-    | campo           | mensagem                            |
-    | nome            | Nome não pode ser vazio             |
-    | email           | Email não pode ser vazio            |
-    | senha           | Senha não pode ser vazio            |
-    | confirmar senha | Confirmar senha não pode ser vazio  |
+    | campo           |
+    | nome            |
+    | email           |
+    | senha           |
+    | confirmar senha |
 
 
   Cenário: Cadastro de usuário com senhas diferentes
     Quando o usuário preencher o formulário de cadastro com o campo de senha com "senha123"
     E preencher o campo de confirmação de senha com "outrasenha123"
-    Então o sistema deve exibir a mensagem de "As senhas não coincidem"
+    Então o alerta de "As senhas não são iguais." deve ser exibido
 
   Cenário: Cadastro com a opção "criar conta com saldo" marcada
     Quando o usuário preencher todos os campos obrigatórios corretamente
     E o usuário selecionar a opção "Criar conta com saldo"
     Então o sistema deve exibir receber uma mensagem de criação de conta com sucesso com o número da conta criada
-    E o sistema deve criar a conta com um saldo de R$ 1.000,00
+    E o sistema deve criar a conta com um saldo de "R$ 1.000,00"
 
   Cenário: Cadastro com a opção "criar conta com saldo" desativada
     Quando o usuário preencher todos os campos obrigatórios corretamente
     E o usuário não selecionar a opção "Criar conta com saldo"
     Então o sistema deve exibir receber uma mensagem de criação de conta com sucesso com o número da conta criada
-    E o sistema deve criar a conta com um saldo de R$ 0,00
+    E o sistema deve criar a conta com um saldo de "R$ 0,00"
