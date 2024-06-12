@@ -15,7 +15,7 @@ class LoginPage(BasePage):
     self.find_element(self.locator.PASSWORD).send_keys(password)
     self.find_element(self.locator.BTN_SUBMIT).click()
 
-  def have_invalid_user_alert(self) -> WebElement:
+  def get_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT)
   

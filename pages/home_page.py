@@ -5,8 +5,8 @@ from utils.locators import HomePageLocators
 
 class HomePage(BasePage):
   def __init__(self, webdriver: webdriver) -> None:
-    self.locator = HomePageLocators
     super().__init__(webdriver)
+    self.locator = HomePageLocators
 
   def is_at_page(self) -> WebElement:
     self.wait_element(self.locator.BTN_LOGOUT)

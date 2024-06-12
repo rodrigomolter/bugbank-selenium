@@ -18,7 +18,7 @@ class Account():
       return self.transfers
     
     @transfers.setter
-    def newTransfer(self, transfer: Transfer) -> list[Transfer]:
+    def new_transfer(self, transfer: Transfer) -> list[Transfer]:
       self.transfer.append(transfer)
       self.updateBalance(transfer.transfer_value)
       return self.transfers
