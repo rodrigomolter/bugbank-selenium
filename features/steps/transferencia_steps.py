@@ -9,13 +9,8 @@ from models.transfer import Transfer
 
 @given('que o usuário está na tela de transferência do BugBank')
 def step_open_transfer_page(context):
-  login_page = LoginPage(context.browser)
-  login_page.open()
-  login_page.delete_browser_data()
-  login_page.auth_by_api()
-
   register_page = RegisterPage(context.browser)
-  context.customer = register_page.register_by_api(logged=True)
+  context.customer = register_page.create_user_and_authenticate()
   context.target = register_page.register_by_api()
   
   context.page = TransferPage(context.browser)

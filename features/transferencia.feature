@@ -1,3 +1,4 @@
+# language: pt
 Funcionalidade: Transferência entre contas
 
   Como um usuário do BugBank,

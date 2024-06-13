@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
+from pages.login_page import LoginPage
 from utils.locators import RegisterPageLocators
 from models.customer import Customer
 
@@ -108,3 +109,11 @@ class RegisterPage(BasePage):
   def get_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT)
+  
+  def create_user_and_authenticate(self, with_balance: bool = False) -> Customer:
+    login_page = LoginPage(self.webdriver)
+    login_page.open("/")
+    login_page.delete_browser_data()
+    login_page.auth_by_api()
+    
+    return self.register_by_api(logged=True, with_balance=with_balance)

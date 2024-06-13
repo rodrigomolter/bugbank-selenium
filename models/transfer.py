@@ -3,9 +3,10 @@ import uuid
 from faker import Faker
 
 class Transfer():
-  def __init__(self, description: str = None, transfer_value: float = None, type: str = "Input") -> None:
+  def __init__(self, account_number: str = None, description: str = None, transfer_value: float = None, type: str = "Input") -> None:
 
     faker = Faker()
+    self.account_number = account_number or f"{faker.random_number(digits=3)}-{faker.random_digit()}"
     self.id = str(uuid.uuid4())
     self.date = datetime.datetime.now().strftime("%d/%m/%Y")
     self.type = type
