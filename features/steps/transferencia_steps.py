@@ -21,7 +21,7 @@ def step_open_transfer_page(context):
 def step_define_user_balance(context, saldo):
   saldo = Utils.currency_to_float(saldo)
   context.customer.account.balance = saldo
-  RegisterPage(context.browser).persist_user_info(context.customer, logged=True)
+  RegisterPage(context.browser).persist_user_info(context.customer)
 
 @when('o usuário preencher todos os campos corretamente')
 def step_fill_transfer_form(context):
@@ -36,7 +36,7 @@ def step_submit_transfer(context):
 def step_update_balance_with_transaction(context):
   updated_user_details = LoginPage(context.browser).get_user_details(context.customer.email)
   expected_balance = context.customer.account.balance - context.transfer.transfer_value
-  context.customer.account.transfers = context.transfer
+  context.customer.account.new_transfer(context.transfer)
   assert updated_user_details["balance"] == expected_balance, f"Saldo atual ({updated_user_details['balance']}) diferente do saldo esperado ({expected_balance}))"
 
 @then('o sistema deve redirecionar o usuário para a página de extrato')

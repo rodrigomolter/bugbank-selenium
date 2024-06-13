@@ -2,8 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
 from pages.login_page import LoginPage
-from utils.locators import RegisterPageLocators
+from pages.transfer_page import TransferPage
 from models.customer import Customer
+from utils.locators import RegisterPageLocators
 
 class RegisterPage(BasePage):
 
@@ -51,23 +52,14 @@ class RegisterPage(BasePage):
 
 
   def register_by_api(self, email: str = None, password: str = None,  name: str = None, with_balance: bool = False, logged: bool = False) -> Customer:
-    customer = Customer(email=email, name=name, password=password, with_balance=with_balance)
+    customer = Customer(email=email, name=name, password=password, with_balance=with_balance, logged=logged)
 
-    script = f"""
-      localStorage.setItem("{customer.email}", JSON.stringify({{
-        "name": "{customer.name}",
-        "email": "{customer.email}",
-        "password": "{customer.password}",
-        "accountNumber": "{customer.account.account_number}",
-        "balance": {customer.account.balance},
-        "logged": {str(logged).lower()}
-    }}));
-    """
-    self.webdriver.execute_script(script)
+    self.persist_user_info(customer)
+    TransferPage(self.webdriver).persist_transfer(customer, customer.account.transfers[0])
+
     return customer
-  
-  def persist_user_info(self, customer: Customer, logged: bool = False) -> None:
 
+  def persist_user_info(self, customer: Customer) -> None:
     script = f"""
       localStorage.setItem("{customer.email}", JSON.stringify({{
         "name": "{customer.name}",
@@ -75,7 +67,7 @@ class RegisterPage(BasePage):
         "password": "{customer.password}",
         "accountNumber": "{customer.account.account_number}",
         "balance": {customer.account.balance},
-        "logged": {str(logged).lower()}
+        "logged": {str(customer.logged).lower()}
     }}));
     """
     self.webdriver.execute_script(script)
@@ -112,7 +104,7 @@ class RegisterPage(BasePage):
   
   def create_user_and_authenticate(self, with_balance: bool = False) -> Customer:
     login_page = LoginPage(self.webdriver)
-    login_page.open("/")
+    login_page.open()
     login_page.delete_browser_data()
     login_page.auth_by_api()
     
