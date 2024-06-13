@@ -16,10 +16,7 @@ The avaiable **Test Plans** for the application are located here: <br>
 To run this project you will need
 
 - [Python 3.x](https://www.python.org/downloads/) (I've used version `3.11.2` while making this project)
-- [Pipenv](https://docs.pipenv.org/) (To install pipenv, run `pip install pipenv` from the command line)
 - Your Browser Webdriver (see more below)
-
-## Installation 🏗️
 
 ### WebDrivers
 For Web UI testing, you will need to install the latest versions of the WebDriver executables for your browser:
@@ -34,17 +31,41 @@ Older versions might be incompatible with each other.
 ChromeDriver and geckodriver must be installed on the
 [system path](https://en.wikipedia.org/wiki/PATH_(variable)).
 
-### Pipenv
-Run `pipenv install` to install the dependencies.
+## Virtual Environment 🌲
+Run `python -m venv envname` to make a new virtual environment, e.g.:
 ```bash
-pipenv install
+python -m venv bugbank
+```
+
+### Active the environment:
+
+- Windows
+
+```bash
+bugbank\Scripts\activate
+```
+- Linux/MacOs
+  
+```bash
+bugbank/bin/activate
+```
+
+## Installation 🏗️
+Install all the requirements
+```bash
+pip install -r requirements.txt
 ```
 
 ## Running the tests ✔️
 For run the tests, make sure you are in the root folder of the project and type in the terminal
 
 ```bash
-pipenv run python -m pytest
+behave
+```
+
+Or you can run just one especific `feature file`
+```bash
+behave features\login.feature
 ```
 
 ## Support this project 🙌
