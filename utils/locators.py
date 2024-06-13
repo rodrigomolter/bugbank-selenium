@@ -31,3 +31,8 @@ class TransferPageLocators():
 
 class BankStatementLocators():
   BALANCE = (By.ID, "textBalanceAvailable")
+  TRANSFER_DESCRIPTION = (By.ID, "textDescription")
+  TRANSFER_VALUE = (By.ID, "textTransferValue")
+  TRANSFER_DATE = (By.ID, "textDateTransaction")
+  TRANSFER_TYPE = (By.ID, "textTypeTransaction")
+  TRANSFERS_CONTAINER = (By.XPATH, r"//*[contains(@class, 'bank-statement__Transaction')]")
