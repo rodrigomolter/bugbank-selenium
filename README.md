@@ -2,7 +2,7 @@
 
 # Bug Bank
 
-This repository contains the automated testing suite for **BugBank**.<br>
+This repository contains the automated testing suite for [**BugBank**](https://bugbank.netlify.app/).<br>
 The goal of this suite is to ensure that the application meets its functional requirements, providing a reliable and seamless user experience.
 
 BugBank application was developed by [Jhonatas Matos](https://www.linkedin.com/in/jhonatas-matos/) and you can check the [Bug Bank repository on github](https://github.com/jhonatasmatos/bugbank-ui).
