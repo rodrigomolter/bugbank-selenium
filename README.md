@@ -1,6 +1,6 @@
 <img alt="BugBank - O banco com bugs e falhas do seu jeito" title="BugBank - O banco com bugs e falhas do seu jeito" src="https://raw.githubusercontent.com/jhonatasmatos/bugbank-ui/main/.github/assets/banner-bugbank.png" height="300">
 
-# Bug Bank
+# Bug Bank 🐞
 
 This repository contains the automated testing suite for [**BugBank**](https://bugbank.netlify.app/).<br>
 The goal of this suite is to ensure that the application meets its functional requirements, providing a reliable and seamless user experience.
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 ```
 
 ## Running the tests ✔️
-For run the tests, make sure you are in the root folder of the project and type in the terminal
+To run the tests, make sure you are in the root folder of the project and type in the terminal
 
 ```bash
 behave
