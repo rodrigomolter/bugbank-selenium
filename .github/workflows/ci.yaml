@@ -20,7 +20,10 @@ jobs:
 
     - name: Install Dependencies
       run: pip install -r requirements.txt
+
+    - name: Setup Firefox
+      uses: browser-actions/setup-firefox@latest
       
     - name: Run Behave
-      run: behave
+      run: behave -d browser="headless firefox"
 
