@@ -15,7 +15,6 @@ def before_all(context):
         case "headless chrome":
             options = ChromeOptions()
             options.add_argument("--headless=new")
-            options.add_argument("--disable-gpu")
             context.browser = Chrome(options=options)
         case "headless firefox":
             options = FirefoxOptions()
