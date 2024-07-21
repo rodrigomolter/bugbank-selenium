@@ -25,5 +25,5 @@ jobs:
       uses: browser-actions/setup-firefox@latest
       
     - name: Run Behave
-      run: behave -d browser="headless firefox"
+      run: behave -D browser="headless firefox"
 
