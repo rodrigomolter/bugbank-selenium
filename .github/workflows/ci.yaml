@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  behave-tests:
+  setup:
     name: 'Run Tests'
     runs-on: ubuntu-latest
     steps: 
@@ -21,9 +21,25 @@ jobs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
 
+  test-firefox:
+    name: 'Run Tests on Mozilla Firefox '
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
     - name: Setup Firefox
       uses: browser-actions/setup-firefox@latest
       
     - name: Run Behave
       run: behave -D browser="headless firefox"
+
+  test-chrome:
+    name: 'Run Tests on Google Chrome'
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - name: Setup Chrome
+      uses: browser-actions/setup-chrome@latest
+      
+    - name: Run Behave
+      run: behave -D browser="headless chrome"
 
