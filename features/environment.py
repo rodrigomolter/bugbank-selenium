@@ -13,7 +13,7 @@ def before_all(context):
         context.browser = Firefox()
     elif browser == 'headless chrome':
         options = ChromeOptions()
-        options.add_argument('--headless')
+        options.add_argument('--headless=new')
         options.add_argument('--disable-gpu')
         context.browser = Chrome(options=options)
     elif browser == 'headless firefox':
