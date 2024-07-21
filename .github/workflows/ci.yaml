@@ -46,7 +46,7 @@ jobs:
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@latest
       with:
-        chrome-version: 120
+        chrome-version: 126
         install-chromedriver: true
       
     - name: Run Behave
