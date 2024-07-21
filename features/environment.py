@@ -24,7 +24,7 @@ def before_all(context):
             raise ValueError(f"Unsupported browser: {browser}")
 
     
-    context.browser.implicitly_wait(15)
+    # context.browser.implicitly_wait(5)
     # context.base_url = context.config.userdata.get('base_url')
 
 def before_scenario(context, scenario):
