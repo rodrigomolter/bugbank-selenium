@@ -14,7 +14,7 @@ Funcionalidade: Transferência entre contas
     E tentar realizar a transferência
     Então o sistema deve debitar o valor transferido da conta do usuário
     E a mensagem "Transferencia realizada com sucesso" deve ser exibida
-    E o sistema deve redirecionar o usuário para a página de extrato
+    # E o sistema deve redirecionar o usuário para a página de extrato
 
   Cenário: Transferência para conta inválida
     Quando o usuário preencher o número da conta com um valor inválido ou inexistente

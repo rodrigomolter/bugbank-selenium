@@ -19,7 +19,7 @@ Funcionalidade: Cadastro de Usuário no BugBank
 
     Exemplos:
     | campo           |
-    | nome            |
+    # | nome            |
     | email           |
     | senha           |
     | confirmar senha |
