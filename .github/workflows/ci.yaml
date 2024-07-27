@@ -25,7 +25,7 @@ jobs:
       uses: browser-actions/setup-firefox@latest
       
     - name: Run Behave
-      run: behave -D browser="headless firefox"
+      run: behave -D browser="headless firefox" -D debug=False
 
   behave-chrome:
     name: 'Run Tests on Google Chrome'
@@ -50,5 +50,5 @@ jobs:
         install-chromedriver: true
       
     - name: Run Behave
-      run: behave -D browser="headless chrome"
+      run: behave -D browser="headless chrome" -D debug=False
 
