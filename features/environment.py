@@ -22,11 +22,7 @@ def before_all(context):
             context.browser = Firefox(options=options)
         case _:
             raise ValueError(f"Unsupported browser: {browser}")
-
     
-    # context.browser.implicitly_wait(5)
-    # context.base_url = context.config.userdata.get('base_url')
-
 def before_scenario(context, scenario):
     if "skip" in scenario.effective_tags:
         scenario.skip("Marked with @skip")
