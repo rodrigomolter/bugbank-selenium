@@ -20,8 +20,8 @@ def before_all(context):
             options = ChromeOptions()
             options.add_argument("--headless=new")
             options.add_argument("--start-maximized")
-            # options.add_argument("--disable-gpu")
-            # options.add_argument("--no-sandbox")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--no-sandbox")
             context.browser = Chrome(options=options)
         case "headless firefox":
             options = FirefoxOptions()
