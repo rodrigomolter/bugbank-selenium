@@ -31,8 +31,7 @@ class RegisterPage(BasePage):
     self.find_element(self.locator.PASSWORD_CONFIRMATION).send_keys(password)
 
   def toggle_create_with_balance(self) -> None:
-    # self.find_element(self.locator.ADD_BALANCE).click()
-    ActionChains(self.webdriver).move_to_element(self.find_element(self.locator.ADD_BALANCE)).click().perform()
+    self.find_element(self.locator.ADD_BALANCE).click()
 
   def click_register_button(self) -> None:
       self.find_element(self.locator.BTN_SUBMIT).click()
