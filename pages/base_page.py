@@ -13,9 +13,11 @@ class BasePage(ABC):
     self.base_url = Utils.get_app_url()
 
   def find_element(self, locator: tuple[By, str]) -> WebElement:
+    self.wait_element(locator)
     return self.webdriver.find_element(*locator)
 
   def find_elements(self, locator: tuple[By, str]) -> list[WebElement]:
+    self.wait_element(locator)
     return self.webdriver.find_elements(*locator)
   
   def open(self, path: str = '') -> None:

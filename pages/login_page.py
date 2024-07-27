@@ -16,7 +16,6 @@ class LoginPage(BasePage):
     self.find_element(self.locator.BTN_SUBMIT).click()
 
   def get_alert(self) -> WebElement:
-    self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT).get_attribute("innerText")
   
   def get_user_details(self, email: str) -> dict:

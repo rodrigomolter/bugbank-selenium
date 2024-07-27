@@ -99,7 +99,6 @@ class RegisterPage(BasePage):
 
 
   def get_alert(self) -> WebElement:
-    self.wait_element(self.locator.MODAL_TEXT)
     return self.find_element(self.locator.MODAL_TEXT).get_attribute("innerText")
   
   def create_user_and_authenticate(self, with_balance: bool = False) -> Customer:

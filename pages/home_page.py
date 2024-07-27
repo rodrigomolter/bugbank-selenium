@@ -9,5 +9,4 @@ class HomePage(BasePage):
     self.locator = HomePageLocators
 
   def is_at_page(self) -> WebElement:
-    self.wait_element(self.locator.BTN_LOGOUT)
     return self.find_element(self.locator.BTN_LOGOUT)
