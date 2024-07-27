@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
 from pages.login_page import LoginPage
 from pages.transfer_page import TransferPage
@@ -30,7 +31,8 @@ class RegisterPage(BasePage):
     self.find_element(self.locator.PASSWORD_CONFIRMATION).send_keys(password)
 
   def toggle_create_with_balance(self) -> None:
-    self.find_element(self.locator.ADD_BALANCE).click()
+    # self.find_element(self.locator.ADD_BALANCE).click()
+    ActionChains(self.webdriver).move_to_element(self.find_element(self.locator.ADD_BALANCE)).click().perform()
 
   def click_register_button(self) -> None:
       self.find_element(self.locator.BTN_SUBMIT).click()
