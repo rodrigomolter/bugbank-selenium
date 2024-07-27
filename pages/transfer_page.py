@@ -53,7 +53,7 @@ class TransferPage(BasePage):
 
   def get_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)  
-    return self.find_element(self.locator.MODAL_TEXT)
+    return self.find_element(self.locator.MODAL_TEXT).get_attribute("innerText")
   
   def transaction_by_api(self, customer: Customer, target: Customer, transfer_value: float = None, description: str = None) -> Transfer:
 

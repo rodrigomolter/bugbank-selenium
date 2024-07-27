@@ -40,13 +40,13 @@ def step_received_new_transaction(context):
 
 @then('o valor da transação deve estar em vermelho, indicando uma saída de fundos')
 def step_transaction_must_be_red(context):
-  assert context.page.get_transactions_value()[0].get_attribute("type") == "Abertura de conta"
-  assert context.page.get_transactions_value()[1].get_attribute("type") == "withdrawal"
+  assert context.page.get_transactions_value()[0] == "Abertura de conta"
+  assert context.page.get_transactions_value()[1] == "withdrawal"
 
 @then('o valor da transação deve estar em verde, indicando uma entrada de fundos')
 def step_transaction_must_be_green(context):
-  assert context.page.get_transactions_value()[0].get_attribute("type") == "Abertura de conta"
-  assert context.page.get_transactions_value()[1].get_attribute("type") == "input"
+  assert context.page.get_transactions_value()[0] == "Abertura de conta"
+  assert context.page.get_transactions_value()[1] == "input"
 
 @step('tiver realizado uma transação sem descrição')
 def step_transaction_with_no_description(context):
@@ -55,4 +55,4 @@ def step_transaction_with_no_description(context):
 
 @then('possuir a descrição "{description}"')
 def step_must_contain_no_description(context, description):
-  assert context.page.get_transactions_description()[1].text == description, f"Descrição esperada ({description}) difere da descrição obtida ({context.page.get_transactions_description()[1].text})"
+  assert context.page.get_transactions_description()[1] == description, f"Descrição esperada ({description}) difere da descrição obtida ({context.page.get_transactions_description()[1].text})"

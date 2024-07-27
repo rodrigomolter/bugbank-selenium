@@ -1,6 +1,4 @@
-import re
 from behave import given, when, then, step
-
 from pages.register_page import RegisterPage
 from models.customer import Customer
 from pages.login_page import LoginPage
@@ -9,7 +7,6 @@ from utils.utils import Utils
 @given('que o usuário está na tela de cadastro do BugBank')
 def step_open_register_page(context):
   context.page = RegisterPage(context.browser)
-  context.page.open()
   context.page.delete_browser_data()
   context.page.open()
   
@@ -23,8 +20,8 @@ def step_register_with_given_data(context):
 
 @then('o sistema deve exibir receber uma mensagem de criação de conta com sucesso com o número da conta criada')
 def step_account_created_successfully(context):
-  text = context.page.get_alert().get_attribute("innerText")
-  assert re.search(r'\d{2,3}-\d', text), f"O número da conta não foi encontrado no texto: {text}."
+  text = context.page.get_alert()
+  assert Utils.has_account_number(text), f"O número da conta não foi encontrado no texto: {text}."
 
 @when('o usuário tenta se cadastrar sem preencher o campo de {campo}')
 def step_register_without_field(context, campo):
@@ -46,7 +43,7 @@ def step_missing_field_warning(context):
 
 @then('o alerta de "{mensagem}" deve ser exibido')
 def step_not_matching_password_alert(context, mensagem):
-   alert = context.page.get_alert().get_attribute("innerText")
+   alert = context.page.get_alert()
    assert Utils.format(alert) == mensagem, f'Mensagem "{mensagem}" não encontrada.'
 
 @when('o usuário preencher o formulário de cadastro com o campo de senha com "{password}"')

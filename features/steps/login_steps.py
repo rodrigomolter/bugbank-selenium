@@ -6,7 +6,6 @@ from pages.register_page import RegisterPage
 @given('que o usuário está na página de login do BugBank')
 def open_login_page(context):
   context.page = LoginPage (context.browser)
-  context.page.open()
   context.page.delete_browser_data()
 
 @when('o usuário fazer login com o email "{email}" e senha "{password}"')
@@ -31,7 +30,7 @@ def login_unsuccessfully(context, email, password):
 
 @then('o sistema deve exibir uma mensagem informando "{mensagem}"')
 def user_or_password_invalid(context, mensagem):
-  text = context.page.get_alert().get_attribute("innerText")
+  text = context.page.get_alert()
   assert text.split("\n")[0] == mensagem, f'Mensagem "{mensagem}" não encontrada.'
 
 @then('o usuário não deve ser autenticado')

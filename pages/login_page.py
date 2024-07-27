@@ -17,7 +17,7 @@ class LoginPage(BasePage):
 
   def get_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
-    return self.find_element(self.locator.MODAL_TEXT)
+    return self.find_element(self.locator.MODAL_TEXT).get_attribute("innerText")
   
   def get_user_details(self, email: str) -> dict:
     response = self.webdriver.execute_script(f"return window.localStorage.getItem('{email}');")

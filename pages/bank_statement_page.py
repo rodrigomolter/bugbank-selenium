@@ -25,10 +25,18 @@ class BankStatementPage(BasePage):
     self.wait_element(self.locator.TRANSFER_DATE)
     return self.find_elements(self.locator.TRANSFER_DATE)
 
-  def get_transactions_description(self) -> list[WebElement]:
+  def get_transactions_description(self) -> list[str]:
     self.wait_element(self.locator.TRANSFER_DESCRIPTION)
-    return self.find_elements(self.locator.TRANSFER_DESCRIPTION)
+    transactions = self.find_elements(self.locator.TRANSFER_DESCRIPTION)
+    values = []
+    for transaction in transactions:
+      values.append(transaction.text)
+    return values
   
-  def get_transactions_value(self) -> list[WebElement]:
+  def get_transactions_value(self) -> list[str]:
     self.wait_element(self.locator.TRANSFER_VALUE)
-    return self.find_elements(self.locator.TRANSFER_VALUE)
+    transactions = self.find_elements(self.locator.TRANSFER_VALUE)
+    values = []
+    for transaction in transactions:
+      values.append(transaction.get_attribute("type"))
+    return values

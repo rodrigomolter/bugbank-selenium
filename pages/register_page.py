@@ -97,10 +97,10 @@ class RegisterPage(BasePage):
   def mandatory_fields_warning(self) -> bool:
     return any(element.is_displayed() for element in self.find_elements(self.locator.INPUT_WARNING))
 
-  
+
   def get_alert(self) -> WebElement:
     self.wait_element(self.locator.MODAL_TEXT)
-    return self.find_element(self.locator.MODAL_TEXT)
+    return self.find_element(self.locator.MODAL_TEXT).get_attribute("innerText")
   
   def create_user_and_authenticate(self, with_balance: bool = False) -> Customer:
     login_page = LoginPage(self.webdriver)

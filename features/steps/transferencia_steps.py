@@ -71,5 +71,5 @@ def step_fill_transfer_form_missing_fields(context):
 
 @then('a mensagem "{mensagem}" deve ser exibida')
 def step_success_message(context, mensagem):
-  alert = context.page.get_alert().get_attribute("innerText")
+  alert = context.page.get_alert()
   assert Utils.format(alert) == mensagem, f'Mensagem "{mensagem}" não encontrada.'
