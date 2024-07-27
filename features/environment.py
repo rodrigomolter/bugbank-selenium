@@ -1,6 +1,8 @@
 from selenium.webdriver import Firefox, Chrome
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+import datetime
+import os
 from ipdb import spost_mortem
 
 
@@ -43,5 +45,13 @@ def after_all(context):
     context.browser.quit()
 
 def after_step(context, step):
-    if context.config.userdata.getbool("debug") and step.status == "failed":
-        spost_mortem(step.exc_traceback)
+    if step.status == "failed":
+        SCREENSHOT_FOLDER = "./screenshots"
+        if not os.path.exists(SCREENSHOT_FOLDER):
+            os.makedirs(SCREENSHOT_FOLDER)
+        now = datetime.datetime.now().strftime('%d%m%Y_%H%M%S')
+        name: str = step.name.replace('"', '').replace('.', '')
+        context.browser.get_screenshot_as_file(f"{SCREENSHOT_FOLDER}/failure-{name}-{now}.png")
+
+        if context.config.userdata.getbool("debug"):
+            spost_mortem(step.exc_traceback)

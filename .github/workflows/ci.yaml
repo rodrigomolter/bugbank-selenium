@@ -26,6 +26,13 @@ jobs:
       
     - name: Run Behave
       run: behave -D browser="headless firefox" -D debug=False
+      
+    - name: Upload screenshots on failure
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshots
+        path: screenshots/
 
   behave-chrome:
     name: 'Run Tests on Google Chrome'
@@ -51,4 +58,11 @@ jobs:
       
     - name: Run Behave
       run: behave -D browser="headless chrome" -D debug=False
+
+    - name: Upload screenshots on failure
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshots
+        path: screenshots/
 
