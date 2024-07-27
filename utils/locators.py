@@ -15,7 +15,7 @@ class RegisterPageLocators():
   NAME = (By.CSS_SELECTOR, ".card__register input[name='name']")
   PASSWORD = (By.CSS_SELECTOR, ".card__register input[name='password']")
   PASSWORD_CONFIRMATION = (By.CSS_SELECTOR, ".card__register input[name='passwordConfirmation']")
-  ADD_BALANCE = (By.ID, "toggleAddBalance")
+  ADD_BALANCE = (By.XPATH, '//label[@id="toggleAddBalance"]/..')
   BTN_SUBMIT = (By.XPATH, "//button[@type='submit'][contains(.,'Cadastrar')]")
   BTN_REGISTER = (By.XPATH, "//div[@class='login__buttons']/button[text()='Registrar']")
   MODAL_TEXT = (By.XPATH, "//p[@id='modalText']")
