@@ -9,12 +9,15 @@ def before_all(context):
 
     match browser:
         case "chrome":
-            context.browser = Chrome()
+            options = ChromeOptions()
+            options.add_argument("--start-maximized")
+            context.browser = Chrome(options=options)
         case "firefox":
             context.browser = Firefox()
         case "headless chrome":
             options = ChromeOptions()
             options.add_argument("--headless=new")
+            options.add_argument("--start-maximized")
             context.browser = Chrome(options=options)
         case "headless firefox":
             options = FirefoxOptions()
