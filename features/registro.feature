@@ -1,4 +1,3 @@
-# language: pt
 Funcionalidade: Cadastro de Usuário no BugBank
   Como um novo usuário do BugBank,
   Eu quero me cadastrar no sistema,
@@ -19,7 +18,7 @@ Funcionalidade: Cadastro de Usuário no BugBank
 
     Exemplos:
     | campo           |
-    # | nome            |
+    | nome            |
     | email           |
     | senha           |
     | confirmar senha |

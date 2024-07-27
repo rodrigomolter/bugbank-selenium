@@ -1,4 +1,3 @@
-# language: pt
 Funcionalidade: Login do usuário
 
   Como um usuário do BugBank,

@@ -1,4 +1,3 @@
-# language: pt
 Funcionalidade: Visualização do extrato
 
   Como um usuário do BugBank,
